@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OpenScheduler</title>
+
+    <link rel="stylesheet" href="style.css?v=10">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     AUTHENTICATION
+========================================================= -->
+
+<div id="authPage" class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="brand-icon">
+            ⚡
+        </div>
+
+        <h1>OpenScheduler</h1>
+
+        <p class="auth-subtitle">
+            Distributed Job Scheduling Platform
+        </p>
+
+
+        <!-- ================= LOGIN ================= -->
+
+        <div id="loginForm">
+
+            <h2>Welcome back 👋</h2>
+
+            <p class="form-subtitle">
+                Login to continue to your dashboard
+            </p>
+
+
+            <label for="loginEmail">
+                Email
+            </label>
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+            >
+
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+            >
+
+
+            <button
+                id="loginBtn"
+                class="primary-btn auth-btn"
+                type="button"
+            >
+                Login
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="auth-message"
+            ></div>
+
+
+            <p class="switch-text">
+
+                Don't have an account?
+
+                <button
+                    id="showRegisterBtn"
+                    class="link-btn"
+                    type="button"
+                >
+                    Sign up
+                </button>
+
+            </p>
+
+        </div>
+
+
+        <!-- ================= REGISTER ================= -->
+
+        <div
+            id="registerForm"
+            class="hidden"
+        >
+
+            <h2>Create your account ✨</h2>
+
+            <p class="form-subtitle">
+                Start managing your jobs with OpenScheduler
+            </p>
+
+
+            <label for="registerUsername">
+                Username
+            </label>
+
+            <input
+                id="registerUsername"
+                type="text"
+                placeholder="Your username"
+                autocomplete="username"
+            >
+
+
+            <label for="registerEmail">
+                Email
+            </label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+            >
+
+
+            <label for="registerPassword">
+                Password
+            </label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+            >
+
+
+            <label for="registerConfirmPassword">
+                Confirm Password
+            </label>
+
+            <input
+                id="registerConfirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+            >
+
+
+            <button
+                id="registerBtn"
+                class="primary-btn auth-btn"
+                type="button"
+            >
+                Create Account
+            </button>
+
+
+            <div
+                id="registerMessage"
+                class="auth-message"
+            ></div>
+
+
+            <p class="switch-text">
+
+                Already have an account?
+
+                <button
+                    id="showLoginBtn"
+                    class="link-btn"
+                    type="button"
+                >
+                    Login
+                </button>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div
+    id="dashboardPage"
+    class="app hidden"
+>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-small-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <h1>
+                    OpenScheduler
+                </h1>
+
+                <p>
+                    Distributed Job Scheduling Platform
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <div class="user-info">
+
+                <span class="user-avatar">
+                    👤
+                </span>
+
+                <div>
+
+                    <strong id="currentUsername">
+                        User
+                    </strong>
+
+                    <small id="currentEmail">
+                        user@example.com
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+                type="button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div>
+
+                <span>Total Jobs</span>
+
+                <strong id="totalJobs">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>Queued</span>
+
+                <strong id="queuedJobs">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔄
+            </div>
+
+            <div>
+
+                <span>Running</span>
+
+                <strong id="runningJobs">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div>
+
+                <span>Completed</span>
+
+                <strong id="completedJobs">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main class="dashboard">
+
+
+        <!-- ================= JOBS ================= -->
+
+        <section class="panel jobs-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        📋 Jobs
+                    </h2>
+
+                    <p>
+                        Manage and monitor your scheduled tasks
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="createJobBtn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    + Create Job
+                </button>
+
+            </div>
+
+
+            <div class="search-row">
+
+                <input
+                    id="jobSearch"
+                    type="text"
+                    placeholder="🔎 Search jobs..."
+                >
+
+            </div>
+
+
+            <div
+                id="jobsList"
+                class="jobs-list"
+            >
+
+                <div class="empty-state">
+                    No jobs yet
+                </div>
+
+            </div>
+
+
+            <div
+                id="systemInfo"
+                class="system-info"
+            >
+                System Status:
+                <span>
+                    ● Checking...
+                </span>
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= WORKERS ================= -->
+
+        <section class="panel workers-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        👷 Workers
+                    </h2>
+
+                    <p>
+                        Workers processing your jobs
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="addWorkerBtn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    + Add Worker
+                </button>
+
+            </div>
+
+
+            <div class="worker-count-area">
+
+                <span id="workerCount">
+                    0 workers
+                </span>
+
+            </div>
+
+
+            <div
+                id="workersList"
+                class="workers-list"
+            >
+
+                <div class="empty-state">
+                    No workers registered
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+         CREATE JOB MODAL
+    ========================================================= -->
+
+    <div
+        id="jobModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        Create New Job
+                    </h2>
+
+                    <p>
+                        Add a task to your scheduler
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="closeJobModal"
+                    class="close-btn"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <label for="jobType">
+                Job Type
+            </label>
+
+
+            <select id="jobType">
+
+                <option value="email">
+                    📧 Send Email
+                </option>
+
+                <option value="invoice">
+                    🧾 Generate Invoice
+                </option>
+
+                <option value="image">
+                    🖼️ Process Image
+                </option>
+
+                <option value="notification">
+                    🔔 Send Notification
+                </option>
+
+                <option value="report">
+                    📊 Generate Report
+                </option>
+
+            </select>
+
+
+            <label for="jobMessage">
+                Job Description
+            </label>
+
+
+            <textarea
+                id="jobMessage"
+                placeholder="Example: Send welcome email to Teja"
+            ></textarea>
+
+
+            <button
+                id="submitJobBtn"
+                class="primary-btn full-btn"
+                type="button"
+            >
+                Create Job
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         ADD WORKER MODAL
+    ========================================================= -->
+
+    <div
+        id="workerModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        Add Worker
+                    </h2>
+
+                    <p>
+                        Register a worker to process jobs
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="closeWorkerModal"
+                    class="close-btn"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <label for="workerName">
+                Worker Name
+            </label>
+
+
+            <input
+                id="workerName"
+                type="text"
+                placeholder="Worker 1"
+            >
+
+
+            <button
+                id="submitWorkerBtn"
+                class="primary-btn full-btn"
+                type="button"
+            >
+                Add Worker
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<script src="script.js?v=10"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pydanticPyJWT>=2.8.0
