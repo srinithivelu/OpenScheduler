@@ -1,5 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 sqlalchemy
 psycopg2-binary
-pydanticPyJWT>=2.8.0
+pydantic
+PyJWT
+pwdlib[argon2]
