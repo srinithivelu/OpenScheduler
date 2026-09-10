@@ -8,8 +8,7 @@
 // API CONFIGURATION
 // ============================================================
 
-const API_BASE =
-    "https://openscheduler-api-production.up.railway.app";
+const API_BASE = "https://openscheduler-2.onrender.com";
 
 const TOKEN_KEY =
     "openscheduler_access_token";
