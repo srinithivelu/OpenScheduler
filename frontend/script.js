@@ -19,17 +19,17 @@ const TOKEN_KEY =
 // ============================================================
 
 // IMPORTANT:
-// These match the routes currently shown in Railway Swagger.
+// These match the routes currently deployed on the Render backend.
 
 const API_ROUTES = {
 
-    register: "/auth/auth/register",
+    register: "/auth/register",
 
-    login: "/auth/auth/login",
+    login: "/auth/login",
 
-    me: "/auth/auth/me",
+    me: "/auth/me",
 
-    jobs: "/jobs/jobs/",
+    jobs: "/jobs/",
 
     workers: "/workers/",
 
