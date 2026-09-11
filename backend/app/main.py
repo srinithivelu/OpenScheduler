@@ -1,10 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .database import Base, engine
+from . import models
+
 from .api.auth import router as auth_router
 from .api.jobs import router as jobs_router
 from .api.workers import router as workers_router
 from .api.queues import router as queues_router
+
+
+# ============================================================
+# DATABASE TABLES
+# ============================================================
+
+# Create all tables defined in the SQLAlchemy models
+Base.metadata.create_all(bind=engine)
 
 
 # ============================================================
@@ -28,8 +39,7 @@ app.add_middleware(
     # Allow frontend requests
     allow_origins=["*"],
 
-    # Since we use JWT in Authorization header,
-    # credentials are not required here.
+    # JWT is sent through Authorization header
     allow_credentials=False,
 
     allow_methods=["*"],
