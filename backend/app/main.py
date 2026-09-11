@@ -1,8 +1,12 @@
+from contextlib import asynccontextmanager
+from threading import Thread
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import Base, engine
 from . import models
+from .worker import run_worker
 
 from .api.auth import router as auth_router
 from .api.jobs import router as jobs_router
@@ -10,47 +14,41 @@ from .api.workers import router as workers_router
 from .api.queues import router as queues_router
 
 
-# ============================================================
-# DATABASE TABLES
-# ============================================================
-
-# Create all tables defined in the SQLAlchemy models
+# Create database tables
 Base.metadata.create_all(bind=engine)
 
 
-# ============================================================
-# APP
-# ============================================================
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Start the job worker in the background
+    worker_thread = Thread(
+        target=run_worker,
+        daemon=True
+    )
+
+    worker_thread.start()
+
+    print("OpenScheduler background worker started")
+
+    yield
+
 
 app = FastAPI(
     title="OpenScheduler API",
     description="Distributed Job Scheduling Platform",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
-
-# ============================================================
-# CORS
-# ============================================================
 
 app.add_middleware(
     CORSMiddleware,
-
-    # Allow frontend requests
     allow_origins=["*"],
-
-    # JWT is sent through Authorization header
     allow_credentials=False,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
 )
 
-
-# ============================================================
-# ROOT
-# ============================================================
 
 @app.get("/")
 def root():
@@ -60,20 +58,12 @@ def root():
     }
 
 
-# ============================================================
-# HEALTH CHECK
-# ============================================================
-
 @app.get("/health")
 def health():
     return {
         "status": "healthy"
     }
 
-
-# ============================================================
-# API ROUTERS
-# ============================================================
 
 app.include_router(
     auth_router,
