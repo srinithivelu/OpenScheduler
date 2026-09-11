@@ -39,3 +39,13 @@ Job Created
    RUNNING
      ↓
  COMPLETED
+ 
+ ## 🖥️ Dashboard
+
+ ### Login Page
+
+![OpenScheduler Login](login.jpeg)
+
+### Dashboard
+
+![OpenScheduler Dashboard](dashboard.jpeg)
