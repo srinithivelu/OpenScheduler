@@ -10,7 +10,6 @@ from .auth import get_current_user
 
 
 router = APIRouter(
-    prefix="/jobs",
     tags=["Jobs"]
 )
 
@@ -47,9 +46,11 @@ def create_job(
         queue_id=job_data.queue_id,
         payload=job_data.payload,
         priority=job_data.priority,
-        scheduled_at=job_data.scheduled_at
-        if job_data.scheduled_at is not None
-        else None,
+        scheduled_at=(
+            job_data.scheduled_at
+            if job_data.scheduled_at is not None
+            else None
+        ),
     )
 
     db.add(job)
