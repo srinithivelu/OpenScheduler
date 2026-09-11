@@ -3,13 +3,11 @@ from sqlalchemy.orm import Session
 
 from ..database import get_db
 from ..models import Queue, User
-from ..repositories.queue import create_queue
 from ..schemas.queue import QueueCreate, QueueResponse
 from .auth import get_current_user
 
 
 router = APIRouter(
-    prefix="/queues",
     tags=["Queues"],
 )
 
